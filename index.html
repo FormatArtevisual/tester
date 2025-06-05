@@ -1,12 +1,46 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Vídeo sem player</title>
+  <title>Yuri 1 Aninho</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      height: 100%;
+      overflow: hidden;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    #overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 10;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body style="margin:0;">
-  <video autoplay controls loop playsinline style="width:100%; height:auto;">
-    <source src="./video.mp4.mp4" type="video/mp4">
+<body>
+  <div id="overlay"></div>
+  <video id="video">
+    <source src="video.mp4.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos HTML5.
   </video>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const video = document.getElementById('video');
+
+    overlay.addEventListener('click', () => {
+      video.play();
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen(); // iOS Safari
+      }
+      overlay.style.display = "none"; // remove a camada de clique
+    });
+  </script>
 </body>
 </html>
